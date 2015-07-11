@@ -118,9 +118,9 @@
 //#endif
 
 // Use if nanode has SRAM chip fitted
-//#ifndef NANODE_SRAM
-//#define NANODE_SRAM 0
-//#endif
+// #ifndef NANODE_SRAM
+// #define NANODE_SRAM 0
+// #endif
 
 #include <inttypes.h>
 #include <avr/io.h>
@@ -198,6 +198,7 @@ void uartDelay() __attribute__ ((naked));
 #endif
 void appStart() __attribute__ ((naked));
 
+/* This should not be triggered because it is defined as 0 */
 #ifdef NANODE_SRAM
 void checkSram( void );
 uint8_t rwSramData(uint8_t);
