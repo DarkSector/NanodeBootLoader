@@ -1,11 +1,12 @@
 #if defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega88) || defined(__AVR_ATmega8__) || defined(__AVR_ATmega88__)
-/* Onboard LED is connected to pin PB5 in Arduino NG, Diecimila, and Duemilanove */ 
+/* Onboard LED is connected to pin PB5 in Arduino NG, Diecimila, and Duemilanove and Pro Mini*/ 
 #ifdef NANODE
-#define LED_DDR     DDRD
-#define LED_PORT    PORTD
-#define LED_PIN     PIND
-#define LED         PIND6
+#define LED_DDR     DDRB
+#define LED_PORT    PORTB
+#define LED_PIN     PINB
+#define LED         PINB5
 
+/* No debug led connected for now*/
 #define DBG_LED1         PIND4
 #define DBG_LED2         PIND5
 #define DBG_LED1_ON  PORTD &= ~(1<<PORTD4)
