@@ -20,7 +20,7 @@
 PROGRAM    = optiboot
 
 # enter the parameters for the avrdude isp tool
-ISPTOOL	   = usbtiny
+ISPTOOL	   = avrispmkII
 #ISPPORT	   = usb
 #ISPSPEED   = -b 115200
 
@@ -38,9 +38,9 @@ LDSECTION  = --section-start=.text=0x3e00
 # unused, avrdude would get confused.
 
 #ISPFUSES    = avrdude -c $(ISPTOOL) -p $(MCU_TARGET) -P $(ISPPORT) $(ISPSPEED) \
-#
+#-e -u -U lock:w:0x3f:m -U efuse:w:0x$(EFUSE):m -U hfuse:w:0x$(HFUSE):m -U lfuse:w:0x$(LFUSE):m
 ISPFUSES    = avrdude -c $(ISPTOOL) -p $(MCU_TARGET)  \
--e -u -U lock:w:0x3f:m -U efuse:w:0x$(EFUSE):m -U hfuse:w:0x$(HFUSE):m -U lfuse:w:0x$(LFUSE):m
+-e -u -U efuse:w:0x$(EFUSE):m -U hfuse:w:0x$(HFUSE):m -U lfuse:w:0x$(LFUSE):m
 ISPFLASH    = avrdude -c $(ISPTOOL) -p $(MCU_TARGET)  \
 -U flash:w:$(PROGRAM)_$(TARGET).hex -U lock:w:0x0f:m
 
@@ -50,8 +50,8 @@ STK500-1 = $(STK500) -e -d$(MCU_TARGET) -pf -vf -if$(PROGRAM)_$(TARGET).hex \
 STK500-2 = $(STK500) -d$(MCU_TARGET) -ms -q -lCF -LCF -cUSB -I200kHz -s -wt
 
 OBJ        = $(PROGRAM).o
-OPTIMIZE = -Os -fno-inline-small-functions -fno-split-wide-types -mshort-calls
-
+# OPTIMIZE = -Os -fno-inline-small-functions -fno-split-wide-types -mshort-calls
+OPTIMIZE = -Os -fno-inline-small-functions -fno-split-wide-types
 DEFS       = 
 LIBS       =
 
